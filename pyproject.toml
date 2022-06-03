@@ -10,6 +10,7 @@ numpy = "^1.22.2"
 requests = "^2.27.1"
 matplotlib = "^3.5.2"
 pandas = "^1.4.2"
+yagmail = "^0.15.277"
 
 [tool.poetry.dev-dependencies]
 

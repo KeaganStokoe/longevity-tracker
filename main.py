@@ -2,6 +2,7 @@ import os
 import requests
 from datetime import datetime, timedelta
 from pprint import pprint
+
     
 date_today = datetime.today()
 date_last_week = datetime.today() - timedelta(7)
@@ -24,13 +25,20 @@ def getWorkoutData():
 
 def getRunningData():
   """
-  Function that returns 
+  Function that returns data about runs completed in the past 7 days.  
   """
   res = getWorkoutData()
   runningData = []
   for item in res.json()["workouts"]:
     if item['sport']['name'] == "Running":
       runningData.append(item)
-getRunningData()
     
-    
+def getWalkingData():
+  """
+  Function that returns data about runs completed in the past 7 days.  
+  """
+  res = getWorkoutData()
+  walkingData = []
+  for item in res.json()["workouts"]:
+    if item['sport']['name'] == "Walking":
+      walkingData.append(item)
