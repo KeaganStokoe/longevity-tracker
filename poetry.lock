@@ -259,6 +259,20 @@ test = ["pytest (>=6.2)", "virtualenv (>20)"]
 toml = ["setuptools (>=42)"]
 
 [[package]]
+name = "sib-api-v3-sdk"
+version = "7.4.0"
+description = "SendinBlue API"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+python-dateutil = ">=2.1"
+six = ">=1.10"
+urllib3 = ">=1.23"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -305,7 +319,7 @@ dkim = ["dkimpy"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.8.0,<3.9"
-content-hash = "085c3334ba46f3f5a176d28a0317504224822a4b5da638c2fa13406ffcc968dc"
+content-hash = "0776efb27007cb20ecf14c40ca06fb83a4384d62ce0eabd39e7ea9cd2ffd76cb"
 
 [metadata.files]
 cachetools = [
@@ -598,6 +612,9 @@ requests = [
 setuptools-scm = [
     {file = "setuptools_scm-6.4.2-py3-none-any.whl", hash = "sha256:acea13255093849de7ccb11af9e1fb8bde7067783450cee9ef7a93139bddf6d4"},
     {file = "setuptools_scm-6.4.2.tar.gz", hash = "sha256:6833ac65c6ed9711a4d5d2266f8024cfa07c533a0e55f4c12f6eff280a5a9e30"},
+]
+sib-api-v3-sdk = [
+    {file = "sib-api-v3-sdk-7.4.0.tar.gz", hash = "sha256:3123585e9ab2825a62bcad0bcaacb129727097a009371cd11137c04a3477d5e2"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
