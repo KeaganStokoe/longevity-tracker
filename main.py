@@ -69,12 +69,8 @@ def createSummary():
     totalRunningDistance += item['distance']
     
   summary = f"""
-    Total runs: {totalRuns}
-    Total distance: {totalRunningDistance/1000}
+    Total runs: {totalRuns}<br>
+    Total distance: {totalRunningDistance/1000:.2f} km
   """
 
-  return summary
-    
-
-createSummary()
-  
+  return summary  
