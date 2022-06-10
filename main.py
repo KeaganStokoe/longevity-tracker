@@ -16,21 +16,21 @@ current_week_params = {'start_date': current_week_start_date, 'end_date': curren
 previous_week_params = {'start_date': previous_week_start_date, 'end_date': previous_week_end_date}
 
 
-def getWorkoutData():
+def getWorkoutData(time_params = current_week_params):
     """
   Function to request all workout data in the past 7 days. 
   """
     api_url: str = f'https://api.sandbox.tryvital.io/v2/summary/workouts/{user_id}'
-    r = requests.get(api_url, headers=headers, params=current_week_params)
+    r = requests.get(api_url, headers=headers, params=time_params)
     return r
 
-def getPreviousWeekWorkoutData():
-    """
-    Function to request workout data in the previous week. 
-    """
-    api_url: str = f'https://api.sandbox.tryvital.io/v2/summary/workouts/{user_id}'
-    r = requests.get(api_url, headers=headers, params=previous_week_params)
-    return r
+# def getPreviousWeekWorkoutData():
+#     """
+#     Function to request workout data in the previous week. 
+#     """
+#     api_url: str = f'https://api.sandbox.tryvital.io/v2/summary/workouts/{user_id}'
+#     r = requests.get(api_url, headers=headers, params=previous_week_params)
+#     return r
   
 def getSleepData():
     """
@@ -52,7 +52,6 @@ def getRunningData():
             runningData.append(item)
     return runningData
 
-
 def getWalkingData():
     """
   Function that returns data about runs completed in the past 7 days.  
@@ -63,7 +62,6 @@ def getWalkingData():
         if item['sport']['name'] == "Walking":
             walkingData.append(item)
     return walkingData
-
 
 def getStrengthTrainingData():
     """
@@ -76,11 +74,15 @@ def getStrengthTrainingData():
             strengthTrainingData.append(item)
     return strengthTrainingData
 
-# Calculate percentage increase or decrease in training volume for the week
+# Calculate percentage increase or decrease in training volume for the week  
+def calculatePercentageDifferenceTrainingVolume():
 # 1. get data for previous week
-  
+  previousWeekData = getWorkoutData(previous_week_params)
+
 # 2. calculate difference between current week and previous week
 # 3. use in summary
+
+calculatePercentageDifferenceTrainingVolume()
 
 
 def createSummary():
