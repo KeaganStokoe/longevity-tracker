@@ -41,11 +41,11 @@ def getSleepData():
     return r
 
 
-def getRunningData():
+def getRunningData(workoutData):
     """
   Function that returns data about runs completed in the past 7 days.  
   """
-    res = getWorkoutData()
+    res = workoutData
     runningData = []
     for item in res.json()["workouts"]:
         if item['sport']['name'] == "Running":
@@ -76,20 +76,35 @@ def getStrengthTrainingData():
 
 # Calculate percentage increase or decrease in training volume for the week  
 def calculatePercentageDifferenceTrainingVolume():
-# 1. get data for previous week
-  previousWeekData = getWorkoutData(previous_week_params)
-
+# 1. get data for current and previous week
+  currentWeekData = getWorkoutData()
+  currentRunData = getRunningData(currentWeekData)
+  
 # 2. calculate difference between current week and previous week
-# 3. use in summary
-
-calculatePercentageDifferenceTrainingVolume()
-
+  totalCurrentRunningDistance = 0
+  for item in currentRunData:
+      totalCurrentRunningDistance += item['distance']
+  
+  previousWeekData = getWorkoutData(previous_week_params)
+  previousRunData = getRunningData(previousWeekData)
+  totalPreviousRunningDistance = 0
+  for item in previousRunData:
+      totalPreviousRunningDistance += item['distance']
+    
+# 3. calculate percentage difference
+  def percentage_difference(a, b):
+      return ((a - b) / ((a + b) / 2)) * 100
+  
+  trainingVolumeDifference = percentage_difference(totalCurrentRunningDistance,totalPreviousRunningDistance)
+  return trainingVolumeDifference
 
 def createSummary():
-    runningData = getRunningData()
+    workoutData = getWorkoutData()
+    runningData = getRunningData(workoutData)
     walkingData = getWalkingData()
     strengthData = getStrengthTrainingData()
     sleepData = getSleepData()
+    runningVolumeDifference = calculatePercentageDifferenceTrainingVolume()
 
     totalRuns = len(runningData)
     totalRunningDistance = 0
@@ -125,19 +140,20 @@ def createSummary():
     summary = f"""
     Total runs: {totalRuns}<br>
     Total distance: {totalRunningDistance/1000:.2f} km<br>
+    vs Previous week: {runningVolumeDifference:.2f}%<br>
     Time on the road: {totalRunningTime/60/60:.2f} hours<br>
     Calories: {caloriesBurntRunning}
-    <br>
+    <hr>
     Total walks: {totalWalks}<br>
     Total distance: {totalWalkingDistance/1000:.2f} km<br>
     Time on the road: {totalWalkingTime/60/60:.2f} hours<br>
     Calories:{caloriesBurntWalking}
-    <br>
+    <hr>
     Total strength sessions: {totalStrengthSessions}<br>
     Time in the gym: {totalStrengthTime/60/60:.2f} hours<br>
     Calories: {caloriesBurntStrength}
     <br>
-    ---------------------------------------------------------
+    <hr>
     <br>
     Average sleep: {totalSleep/60/60/7:.2f} hours <br>
     Average deep sleep: {totalDeepSleep/60/60/7:.2f} hours <br>
