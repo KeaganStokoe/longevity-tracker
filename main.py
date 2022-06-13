@@ -44,11 +44,11 @@ def getRunningData(workoutData):
             runningData.append(item)
     return runningData
 
-def getWalkingData():
+def getWalkingData(workoutData):
     """
   Function that returns data about runs completed in the past 7 days.  
   """
-    res = getWorkoutData()
+    res = workoutData
     walkingData = []
     for item in res.json()["workouts"]:
         if item['sport']['name'] == "Walking":
@@ -93,7 +93,7 @@ def calculatePercentageDifferenceTrainingVolume():
 def createSummary():
     workoutData = getWorkoutData()
     runningData = getRunningData(workoutData)
-    walkingData = getWalkingData()
+    walkingData = getWalkingData(workoutData)
     strengthData = getStrengthTrainingData()
     sleepData = getSleepData()
     runningVolumeDifference = calculatePercentageDifferenceTrainingVolume()
