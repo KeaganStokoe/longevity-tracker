@@ -5,7 +5,6 @@ from pprint import pprint
 
 current_week_start_date = (datetime.today() - timedelta(7)).strftime("%Y-%m-%d")
 current_week_end_date = datetime.today().strftime("%Y-%m-%d")
-
 previous_week_start_date = (datetime.today() - timedelta(14)).strftime("%Y-%m-%d")
 previous_week_end_date = (datetime.today() - timedelta(7)).strftime("%Y-%m-%d")
 
@@ -18,20 +17,13 @@ previous_week_params = {'start_date': previous_week_start_date, 'end_date': prev
 
 def getWorkoutData(time_params = current_week_params):
     """
-  Function to request all workout data in the past 7 days. 
+  Function to request all workout data. By deafult, it will request data from the past 7 days. 
+  To request data for the 7 days before that, pass 'previous_week_params' as an argument.
   """
     api_url: str = f'https://api.sandbox.tryvital.io/v2/summary/workouts/{user_id}'
     r = requests.get(api_url, headers=headers, params=time_params)
     return r
 
-# def getPreviousWeekWorkoutData():
-#     """
-#     Function to request workout data in the previous week. 
-#     """
-#     api_url: str = f'https://api.sandbox.tryvital.io/v2/summary/workouts/{user_id}'
-#     r = requests.get(api_url, headers=headers, params=previous_week_params)
-#     return r
-  
 def getSleepData():
     """
   Function to request all sleep data in the past 7 days. 
@@ -43,7 +35,7 @@ def getSleepData():
 
 def getRunningData(workoutData):
     """
-  Function that returns data about runs completed in the past 7 days.  
+  Function that returns running data given a list of workouts. 
   """
     res = workoutData
     runningData = []
@@ -158,4 +150,7 @@ def createSummary():
     Average sleep: {totalSleep/60/60/7:.2f} hours <br>
     Average deep sleep: {totalDeepSleep/60/60/7:.2f} hours <br>
   """
+    pprint(summary)
     return summary
+
+createSummary()
