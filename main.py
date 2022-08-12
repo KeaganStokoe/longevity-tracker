@@ -17,7 +17,7 @@ previous_week_params = {'start_date': previous_week_start_date, 'end_date': prev
 
 def getWorkoutData(time_params = current_week_params):
     """
-  Function to request all workout data. By deafult, it will request data from the past 7 days. 
+  Request all workout data. By default, it will request data from the past 7 days. 
   To request data for the 7 days before that, pass 'previous_week_params' as an argument.
   """
     api_url: str = f'https://api.sandbox.tryvital.io/v2/summary/workouts/{user_id}'
@@ -148,7 +148,6 @@ def createSummary():
     <hr>
     <br>
     Average sleep: {totalSleep/60/60/7:.2f} hours <br>
-    Average deep sleep: {totalDeepSleep/60/60/7:.2f} hours <br>
   """
     pprint(summary)
     return summary

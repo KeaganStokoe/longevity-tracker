@@ -10,7 +10,7 @@ configuration.api_key['api-key'] = email_api_key
 
 api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
 subject = "Exercise for longevity update"
-html_content = "<html><body><h1>Here's your weekly exercise update 🏃‍♂️ </h1></body></html>" + createSummary()
+html_content = "<html><body><h1 color='blue'>Here's your weekly exercise update 🏃‍♂️ </h1></body></html>" + createSummary()
 sender = {"name":"Keagan Stokoe","email":"xilolabs@gmail.com"}
 to = [{"email":"keagan.stokoe@gmail.com","name":"KMS"}]
 headers = {"Some-Custom-Name":"unique-id-1234"}
